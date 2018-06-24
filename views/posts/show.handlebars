@@ -1,0 +1,122 @@
+<style>
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+</style>
+
+
+<div class="row">
+  <div class="col s12 m8">
+
+    <div class="card map">
+      <div class="card-content">
+        <h4>{{post.title}}</h4>
+        {{{post.intro}}} 
+
+      
+        <div id="map"></div>
+
+        <script>
+          function initMap() {
+            var options = {
+              zoom: 2,
+              // needs to be current location
+              center: { lat:42.46668,lng: 61.9495 } 
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+            // Add marker
+            var marker = new google.maps.Marker({
+              // needs to be the current user's info
+                position : {lat:{{{post.latitude}}},lng:{{{post.longitude}}} },
+                map:map,
+                icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+              content:
+            '<h4>{{{post.name}}}'+'</h4>'+
+            '<div id="bodyContent"><br>'+            
+         
+            '<img src="data:image/jpeg;base64,{{post.imagedata}}" width="150px">' +
+
+            '<br>{{{post.address}}}<br>'+
+            '{{{post.tel}}}<br>'+
+            '{{{post.name}}}<br>'+
+            '{{{post.intro}}}<br>'+
+            '</div>'
+            });
+
+            marker.addListener('click', function(){
+              infoWindow.open(map,marker);
+            });
+          }
+        </script>
+       <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYJ6CXTFmOh_Q_Q1s00B5LMrLCLj6TaU8&callback=initMap">
+    </script>
+
+      </div>
+    </div>
+
+    <div class="card story">
+
+      <div class="card-content">
+
+        <a href="/posts/user/{{post.user.id}}">More From {{post.user.firstName}}</a>
+                <span class="card-title">{{DateSet post.date 'MMMM Do YYYY'}}</span>
+    
+    </div>
+    </div>
+    
+
+    {{#if post.allowComments}}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Comments</span>
+          {{#if user}}
+            <form method="post" action="/posts/comment/{{post.id}}">
+              <div class="input-field">
+                <textarea name="commentBody" class="materialize-textarea"></textarea>
+                <label>Add Comment</label>
+              </div>
+              <input type="submit" value="Submit" class="btn">
+            </form>
+          {{else}}
+            <p>Please <a href="/auth/google">log in </a> to leave a comment</p>
+          {{/if}}
+        </div>
+      </div>
+      
+      {{#each post.comments}}
+          <h5>{{commentBody}}</h5>
+          <a href="/posts/user/{{commentUser.id}}">
+          {{commentUser.firstName}} {{commentUser.lastName}}</a>
+          <h5>Posted: {{DateSet commentDate 'MMMM do YYYY'}}</h5>
+        </div>
+      {{/each}}
+    {{/if}}
+    </div>
+
+    <div class="col s12 m4">
+      <div class="card center-align">
+        <div class="card-action">
+          <a href="/posts/analytics/{{post.id}}">ARCode Analytic</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117117322-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117117322-1');
+</script>

@@ -1,0 +1,71 @@
+
+
+<h1>Add Posts</h1>
+<div class="row">
+  <form action="/posts" method="post" class="col s12" enctype="multipart/form-data">
+    <div class="row">
+      <div class="input-field">
+        <input type="text" name="title" required>
+        <label for="title">Title</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status">
+          <option value="public" selected>Public</option>
+          <option value="private">Private</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <p>
+        <input type="checkbox" name="allowComments" class="filled-in" id="filled-in-box" checked="checked">
+        <label for="filled-in-box">Allow Comments </label>
+      </p>
+    </div>
+
+    <div class="row">
+      <table>
+					<tr>
+						<td><label>Phone Number</label></td>
+						<td><input type="text" name="tel" value="" placeholder="1-234-566-7890" /></td>
+					</tr>
+					<tr>
+						<td><label>Longitude</label></td>
+						<td><input type="text" name="longitude" value="" placeholder="-71.058880"/></td>
+					</tr>
+					<tr>
+						<td><label>Latitude</label></td>
+						<td><input type="text" name="latitude" value="" placeholder="42.360082" /></td>
+					</tr>
+					<tr>
+						<td><label>Intro</label></td>
+						<td><input type="text" name="intro" value="" placeholder="Share your idea" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Image</label></td>
+						<td>
+              <div class="file-field input-field">
+                <div class="btn grey">
+                  <span>File</span>
+                  <input name="image" type="file">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+              </div>
+              Prefer QR/AR. But you can upload any picture type
+              </td>
+					</tr>
+				</table>
+    </div>
+
+    <input type="submit" value="Save" class="btn">
+  </form>
+</div>
+
+

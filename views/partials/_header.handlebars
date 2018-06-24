@@ -1,0 +1,35 @@
+<nav class="grey darken-3">
+  <div class="container">
+    <div class="nav-wrapper">
+      
+      <a href="/" class="brand-logo center"><img src="/public/ox.jpg" width="9%" height="9%">Code Go</a>
+      <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+
+      <ul>
+        {{#if user}}
+        <li>Welcome {{user.firstName}}</li>
+        <li><a href="/auth/logout">Logout</a></li>
+
+        {{else}}
+        <li><a href="/posts">Public Posts</a></li>
+        {{/if}}
+      </ul>
+
+      <ul class="side-nav" id="main-menu">
+        {{#if user}} 
+        {{else}}
+        <li>
+          <a class="btn red" href="/auth/google"> Login With Google</a>
+        </li>
+        {{/if}}
+        <li><a href="/posts">Public Posts</a></li>
+        {{#if user}}
+        <li><a href="/dashboard"> Dashboard</a></li>
+        <li><a href="/posts/my">My Posts</a></li>
+        <li><a href="/auth/logout"> Logout</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
